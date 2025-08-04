@@ -7,7 +7,7 @@ export interface Props {
   description?: string;
 }
 
-const { title, description = 'Symfony Codex - Generate boilerplate code from YAML schemas. Save hours of repetitive coding.' } = Astro.props;
+const { title, description = 'Embrex - Generate boilerplate code from YAML schemas. Save hours of repetitive coding.' } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -18,21 +18,21 @@ const { title, description = 'Symfony Codex - Generate boilerplate code from YAM
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="generator" content={Astro.generator} />
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og-image.png" />
-  
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content="/og-image.png" />
-  
+
   <title>{title}</title>
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,54 +42,54 @@ const { title, description = 'Symfony Codex - Generate boilerplate code from YAM
   <LanguageRedirect />
   <Navbar />
   <slot />
-  
+
   <style is:global>
     html {
       scroll-behavior: smooth;
     }
-    
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       padding-top: 64px; /* Account for fixed navbar */
     }
-    
+
     code, pre {
       font-family: 'JetBrains Mono', monospace;
     }
-    
+
     /* Custom scrollbar */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
     }
-    
+
     ::-webkit-scrollbar-track {
       @apply bg-gray-100 dark:bg-gray-900;
     }
-    
+
     ::-webkit-scrollbar-thumb {
       @apply bg-gray-400 dark:bg-gray-600 rounded;
     }
-    
+
     ::-webkit-scrollbar-thumb:hover {
       @apply bg-gray-500 dark:bg-gray-500;
     }
-    
+
     /* Animations */
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-20px); }
     }
-    
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .float-animation {
       animation: float 6s ease-in-out infinite;
     }
-    
+
     .fade-in {
       animation: fadeIn 0.6s ease-out forwards;
     }
