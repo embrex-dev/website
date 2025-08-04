@@ -1,0 +1,208 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+const lang = Astro.currentLocale || 'en';
+const t = useTranslations(lang);
+---
+
+<section id="how-it-works" class="py-20 lg:py-32 bg-white dark:bg-gray-900 relative overflow-hidden">
+  <!-- Background decoration -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-ember-500/50 to-transparent"></div>
+    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-flame-500/50 to-transparent"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-ember-600 bg-ember-100 rounded-full dark:bg-ember-900 dark:text-ember-300">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+        </svg>
+        {t('howItWorks.badge')}
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        {t('howItWorks.title')} <span class="text-transparent bg-clip-text bg-gradient-to-r from-ember-600 to-flame-600">{t('howItWorks.titleHighlight')}</span>
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        {t('howItWorks.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8 mb-16">
+      <!-- Step 1 -->
+      <div class="relative">
+        <div class="bg-gradient-to-br from-ember-500 to-flame-600 rounded-2xl p-8 text-white">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-2xl font-bold text-ember-600 dark:text-ember-400 shadow-lg">
+            1
+          </div>
+          <h3 class="text-2xl font-bold mb-4">{t('howItWorks.step1.title')}</h3>
+          <p class="mb-6 opacity-90">{t('howItWorks.step1.desc')}</p>
+          <div class="bg-black/20 rounded-lg p-4 font-mono text-sm">
+            <pre><code>{`entities:
+  Product:
+    properties:
+      sku: string(50)
+      name: string(255)
+      price: decimal(10,2)
+      stock: integer
+      isActive: boolean
+    relations:
+      category: manyToOne(Category)
+      
+  Category:
+    properties:
+      name: string(100)
+      slug: string(100)`}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="relative">
+        <div class="bg-gradient-to-br from-gray-700 to-gray-900 rounded-2xl p-8 text-white">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-2xl font-bold text-gray-700 dark:text-gray-400 shadow-lg">
+            2
+          </div>
+          <h3 class="text-2xl font-bold mb-4">{t('howItWorks.step2.title')}</h3>
+          <p class="mb-6 opacity-90">{t('howItWorks.step2.desc')}</p>
+          <div class="bg-black/20 rounded-lg p-4 font-mono text-sm">
+            <pre><code>{`$ php bin/console embrex:build
+
+✓ ${t('howItWorks.step2.output1')}
+✓ ${t('howItWorks.step2.output2')}
+✓ ${t('howItWorks.step2.output3')}
+✓ ${t('howItWorks.step2.output4')}`}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="relative">
+        <div class="bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl p-8 text-white">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-2xl font-bold text-green-600 dark:text-green-400 shadow-lg">
+            3
+          </div>
+          <h3 class="text-2xl font-bold mb-4">{t('howItWorks.step3.title')}</h3>
+          <p class="mb-6 opacity-90">{t('howItWorks.step3.desc')}</p>
+          <div class="bg-black/20 rounded-lg p-4 text-sm space-y-2">
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>{t('howItWorks.step3.check1')}</span>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>{t('howItWorks.step3.check2')}</span>
+            </div>
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span>{t('howItWorks.step3.check3')}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example Schema -->
+    <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 lg:p-12">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        {t('howItWorks.example.title')}
+      </h3>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div>
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <svg class="w-5 h-5 mr-2 text-ember-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+            {t('howItWorks.example.schemaTitle')}
+          </h4>
+          <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto">
+            <pre class="text-green-400 text-sm"><code>{`entities:
+  Product:
+    properties:
+      sku: string(50)
+      name: string(255)
+      price: decimal(10,2)
+      stock: integer
+      isActive: boolean
+    relations:
+      category: manyToOne(Category)
+      
+  Category:
+    properties:
+      name: string(100)
+      slug: string(100)
+    relations:
+      products: oneToMany(Product)
+      
+  Order:
+    properties:
+      orderNumber: string(50)
+      totalAmount: decimal(10,2)
+      status: string(20)
+    relations:
+      items: oneToMany(OrderItem)
+      
+forms:
+  ProductType:
+    entity: Product
+    fields:
+      sku: text
+      name: text
+      price: money
+      category: entity
+    
+controllers:
+  ProductController:
+    actions:
+      index: /products
+      show: /products/{id}
+      
+api_resources:
+  ProductResource:
+    entity: Product
+    operations: [Get, GetCollection, Post, Put, Delete]`}</code></pre>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            {t('howItWorks.example.generatedTitle')}
+          </h4>
+          <div class="space-y-2">
+            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 flex items-center justify-between">
+              <span class="text-sm font-mono text-gray-700 dark:text-gray-300">src/Entity/Product.php</span>
+              <span class="text-xs text-green-600 dark:text-green-400">✓ {t('howItWorks.example.created')}</span>
+            </div>
+            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 flex items-center justify-between">
+              <span class="text-sm font-mono text-gray-700 dark:text-gray-300">src/Repository/ProductRepository.php</span>
+              <span class="text-xs text-green-600 dark:text-green-400">✓ {t('howItWorks.example.created')}</span>
+            </div>
+            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 flex items-center justify-between">
+              <span class="text-sm font-mono text-gray-700 dark:text-gray-300">src/Form/ProductType.php</span>
+              <span class="text-xs text-green-600 dark:text-green-400">✓ {t('howItWorks.example.created')}</span>
+            </div>
+            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 flex items-center justify-between">
+              <span class="text-sm font-mono text-gray-700 dark:text-gray-300">src/Controller/ProductController.php</span>
+              <span class="text-xs text-green-600 dark:text-green-400">✓ {t('howItWorks.example.created')}</span>
+            </div>
+            <div class="bg-white dark:bg-gray-700 rounded-lg p-3 flex items-center justify-between">
+              <span class="text-sm font-mono text-gray-700 dark:text-gray-300">src/ApiResource/ProductResource.php</span>
+              <span class="text-xs text-green-600 dark:text-green-400">✓ {t('howItWorks.example.created')}</span>
+            </div>
+            <div class="text-center mt-4 text-sm text-gray-600 dark:text-gray-400">
+              {t('howItWorks.example.moreFiles')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

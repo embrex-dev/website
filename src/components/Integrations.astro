@@ -1,0 +1,208 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+const lang = Astro.currentLocale || 'en';
+const t = useTranslations(lang);
+
+const integrations = [
+  {
+    name: "API Platform",
+    logo: "🔥",
+    description: t('integrations.apiPlatform.desc'),
+    features: [t('integrations.apiPlatform.feature1'), t('integrations.apiPlatform.feature2'), t('integrations.apiPlatform.feature3')]
+  },
+  {
+    name: "Sylius Stack",
+    logo: "🛍️",
+    description: t('integrations.sylius.desc'),
+    features: [t('integrations.sylius.feature1'), t('integrations.sylius.feature2'), t('integrations.sylius.feature3')]
+  },
+  {
+    name: "Doctrine",
+    logo: "🗄️",
+    description: t('integrations.doctrine.desc'),
+    features: [t('integrations.doctrine.feature1'), t('integrations.doctrine.feature2'), t('integrations.doctrine.feature3')]
+  },
+  {
+    name: "Symfony UX",
+    logo: "🎨",
+    description: t('integrations.symfonyUx.desc'),
+    features: [t('integrations.symfonyUx.feature1'), t('integrations.symfonyUx.feature2'), t('integrations.symfonyUx.feature3')]
+  },
+  {
+    name: "Messenger",
+    logo: "📬",
+    description: t('integrations.messenger.desc'),
+    features: [t('integrations.messenger.feature1'), t('integrations.messenger.feature2'), t('integrations.messenger.feature3')]
+  },
+  {
+    name: "Webhooks",
+    logo: "🔗",
+    description: t('integrations.webhooks.desc'),
+    features: [t('integrations.webhooks.feature1'), t('integrations.webhooks.feature2'), t('integrations.webhooks.feature3')]
+  }
+];
+---
+
+<section id="integrations" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-orange-600 bg-orange-100 rounded-full dark:bg-orange-900 dark:text-orange-300">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+        {t('integrations.badge')}
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        {t('integrations.title')} <span class="text-transparent bg-clip-text bg-gradient-to-r from-ember-600 to-flame-600">{t('integrations.titleHighlight')}</span>
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        {t('integrations.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      {integrations.map((integration) => (
+        <div class="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="flex items-start mb-4">
+            <div class="text-4xl mr-4">{integration.logo}</div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{integration.name}</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{integration.description}</p>
+            </div>
+          </div>
+          <div class="space-y-2">
+            {integration.features.map((feature) => (
+              <div class="flex items-center text-sm">
+                <svg class="w-4 h-4 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-gray-700 dark:text-gray-300">{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Code Example -->
+    <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+        {t('integrations.example.title')}
+      </h3>
+      
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div>
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('integrations.example.defineOnce')}</h4>
+          <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto">
+            <pre class="text-green-400 text-sm"><code>{`entities:
+  Product:
+    properties:
+      sku: string(50)
+      name: string(255)
+      price: decimal(10,2)
+      description: text
+      isActive: boolean
+    extensions:
+      timestampable: ~
+      
+api_resources:
+  ProductResource:
+    entity: Product
+    normalization_context:
+      groups: [product:read]
+    denormalization_context:
+      groups: [product:write]
+    filters:
+      - search: [name, description]  
+      - order: [name, price]
+    
+sylius_resources:
+  Product:
+    entity: Product
+    driver: doctrine/orm
+    
+webhooks:
+  stripe_payment:
+    type: custom
+    parser:
+      request_matcher:
+        path: /webhook/stripe
+        methods: [POST]
+        headers:
+          stripe-signature: ~
+    events:
+      payment_intent.succeeded:
+        properties:
+          id: string
+          amount: integer
+          status: string`}</code></pre>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('integrations.example.getEverything')}</h4>
+          <div class="space-y-3">
+            <div class="bg-ember-50 dark:bg-ember-900/20 rounded-lg p-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-medium text-ember-900 dark:text-ember-100">API Platform</span>
+                <span class="text-xs text-ember-600 dark:text-ember-400">{t('integrations.example.autoGenerated')}</span>
+              </div>
+              <ul class="text-sm text-ember-700 dark:text-ember-300 space-y-1">
+                <li>• {t('integrations.example.apiFeature1')}</li>
+                <li>• {t('integrations.example.apiFeature2')}</li>
+                <li>• {t('integrations.example.apiFeature3')}</li>
+              </ul>
+            </div>
+            
+            <div class="bg-flame-50 dark:bg-flame-900/20 rounded-lg p-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-medium text-flame-900 dark:text-flame-100">Sylius Stack</span>
+                <span class="text-xs text-flame-600 dark:text-flame-400">{t('integrations.example.autoGenerated')}</span>
+              </div>
+              <ul class="text-sm text-flame-700 dark:text-flame-300 space-y-1">
+                <li>• {t('integrations.example.syliusFeature1')}</li>
+                <li>• {t('integrations.example.syliusFeature2')}</li>
+                <li>• {t('integrations.example.syliusFeature3')}</li>
+              </ul>
+            </div>
+            
+            <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-medium text-green-900 dark:text-green-100">Webhooks</span>
+                <span class="text-xs text-green-600 dark:text-green-400">{t('integrations.example.autoGenerated')}</span>
+              </div>
+              <ul class="text-sm text-green-700 dark:text-green-300 space-y-1">
+                <li>• {t('integrations.example.webhookFeature1')}</li>
+                <li>• {t('integrations.example.webhookFeature2')}</li>
+                <li>• {t('integrations.example.webhookFeature3')}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Integrations -->
+    <div class="mt-12 bg-gradient-to-r from-gray-800 to-gray-700 rounded-2xl p-8 text-center">
+      <h3 class="text-xl font-bold text-white mb-4">{t('integrations.custom.title')}</h3>
+      <p class="text-gray-300 mb-6 max-w-2xl mx-auto">
+        {t('integrations.custom.desc')}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#testimonials" class="inline-flex items-center px-6 py-3 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          {t('integrations.custom.learnMore')}
+        </a>
+        <a href="#enterprise" class="inline-flex items-center px-6 py-3 bg-ember-600 text-white font-semibold rounded-lg hover:bg-ember-700 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          {t('integrations.custom.exploreEnterprise')}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

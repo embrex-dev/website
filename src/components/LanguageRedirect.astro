@@ -1,0 +1,22 @@
+---
+// This component handles client-side language detection
+---
+
+<script>
+  // Only run on the homepage
+  if (window.location.pathname === '/' || window.location.pathname === '') {
+    // Get browser language
+    const browserLang = navigator.language || navigator.languages[0];
+    
+    // Check if French is preferred
+    if (browserLang.startsWith('fr')) {
+      // Check if we haven't already redirected (to avoid infinite loop)
+      const hasRedirected = sessionStorage.getItem('langRedirected');
+      
+      if (!hasRedirected) {
+        sessionStorage.setItem('langRedirected', 'true');
+        window.location.href = '/fr/';
+      }
+    }
+  }
+</script>

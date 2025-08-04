@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+---
+
+<Layout title={t('privacy.title')}>
+  <div class="min-h-screen bg-white dark:bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          {t('privacy.title')}
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300">
+          {t('privacy.subtitle')}
+        </p>
+      </div>
+
+      <div class="prose prose-lg max-w-none dark:prose-invert">
+        <h2>{t('privacy.dataCollection.title')}</h2>
+        <p>{t('privacy.dataCollection.content')}</p>
+
+        <h2>{t('privacy.thirdPartyServices.title')}</h2>
+        <p>{t('privacy.thirdPartyServices.content')}</p>
+        <ul>
+          <li>{t('privacy.thirdPartyServices.formsubmit')}</li>
+        </ul>
+
+        <h2>{t('privacy.cookies.title')}</h2>
+        <p>{t('privacy.cookies.content')}</p>
+
+        <h2>{t('privacy.contact.title')}</h2>
+        <p>{t('privacy.contact.content')}</p>
+
+        <div class="mt-8 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+          <p class="text-sm text-gray-600 dark:text-gray-400 m-0">
+            {t('privacy.lastUpdated')}: {new Date('2025-08-04').toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

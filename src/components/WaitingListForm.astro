@@ -1,0 +1,157 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+const lang = Astro.currentLocale || 'en';
+const t = useTranslations(lang);
+---
+
+<div id="waiting-list-form" class="max-w-md mx-auto" data-sending={t('form.sending')} data-error={t('form.error')}>
+  <form class="space-y-4" action="https://formsubmit.co/waiting@embrex.dev" method="POST">
+    <!-- FormSubmit configuration -->
+    <input type="hidden" name="_subject" value={t('form.emailSubject')}>
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_next" value={`${Astro.url.origin}${lang === 'fr' ? '/fr' : ''}#success`}>
+    <input type="hidden" name="_autoresponse" value={t('form.autoResponse')}>
+
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        {t('form.fullName')}
+      </label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        required
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ember-500 focus:border-transparent transition-colors"
+        placeholder={t('form.fullNamePlaceholder')}
+      />
+    </div>
+
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        {t('form.email')}
+      </label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        required
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ember-500 focus:border-transparent transition-colors"
+        placeholder={t('form.emailPlaceholder')}
+      />
+    </div>
+
+    <div>
+      <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        {t('form.company')}
+      </label>
+      <input
+        type="text"
+        name="company"
+        id="company"
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ember-500 focus:border-transparent transition-colors"
+        placeholder={t('form.companyPlaceholder')}
+      />
+    </div>
+
+    <div>
+      <label for="use-case" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        {t('form.useCase')}
+      </label>
+      <textarea
+        name="use-case"
+        id="use-case"
+        rows="3"
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ember-500 focus:border-transparent transition-colors resize-none"
+        placeholder={t('form.useCasePlaceholder')}
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full px-6 py-3 bg-gradient-to-r from-ember-600 to-flame-600 text-white font-semibold rounded-lg hover:from-ember-700 hover:to-flame-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ember-500"
+    >
+      {t('form.submit')}
+    </button>
+
+    <p class="text-xs text-center text-gray-500 dark:text-gray-400 mt-4">
+      {t('form.privacy')}
+    </p>
+  </form>
+
+  <div id="success-message" class="hidden">
+    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 text-center">
+      <svg class="w-12 h-12 text-green-500 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+      </svg>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+        {t('form.successTitle')}
+      </h3>
+      <p class="text-gray-600 dark:text-gray-300">
+        {t('form.successMessage')}
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Handle form submission with JavaScript for better UX
+  const form = document.querySelector('#waiting-list-form form') as HTMLFormElement;
+  const successMessage = document.getElementById('success-message');
+
+  if (form && successMessage) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const originalText = submitButton.textContent;
+
+      // Show loading state
+      submitButton.disabled = true;
+      const waitingListDiv = document.getElementById('waiting-list-form');
+      const sendingText = waitingListDiv?.getAttribute('data-sending') || 'Sending...';
+      const errorText = waitingListDiv?.getAttribute('data-error') || 'An error occurred. Please try again.';
+
+      submitButton.textContent = sendingText;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Hide form and show success message
+          form.style.display = 'none';
+          successMessage.classList.remove('hidden');
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (error) {
+        // Reset button and show error
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+        alert(errorText);
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Custom focus styles */
+  input:focus,
+  textarea:focus {
+    outline: none;
+  }
+
+  /* Smooth transitions */
+  input,
+  textarea,
+  button {
+    transition: all 0.2s ease;
+  }
+</style>

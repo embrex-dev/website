@@ -1,0 +1,150 @@
+---
+import LanguagePicker from './LanguagePicker.astro';
+import { useTranslations } from '../i18n/ui';
+
+const lang = Astro.currentLocale || 'en';
+const t = useTranslations(lang);
+
+const navItems = [
+  { href: '#problem', label: t('nav.problem') },
+  { href: '#features', label: t('nav.features') },
+  { href: '#how-it-works', label: t('nav.howItWorks') },
+  { href: '#code-example', label: t('nav.example') },
+  { href: '#architecture', label: t('nav.architecture') },
+  { href: '#integrations', label: t('nav.integrations') },
+  { href: '#enterprise', label: t('nav.enterprise') },
+  { href: '#testimonials', label: t('nav.testimonials') },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href={lang === 'fr' ? '/fr' : '/'} class="flex items-center space-x-2">
+        <div class="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-lg">E</span>
+        </div>
+        <span class="font-bold text-xl text-gray-900 dark:text-white">Embrex</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-1">
+        {navItems.map((item) => (
+          <a 
+            href={item.href}
+            class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-ember-600 dark:text-gray-300 dark:hover:text-ember-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA Button and Language Picker -->
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="#how-it-works" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-ember-600 rounded-lg hover:bg-ember-700 transition-colors">
+          {t('nav.getStarted')}
+        </a>
+        <LanguagePicker />
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        type="button"
+        class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        id="mobile-menu-button"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="hidden md:hidden" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+      {navItems.map((item) => (
+        <a 
+          href={item.href}
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-ember-600 dark:text-gray-300 dark:hover:text-ember-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a href="#how-it-works" class="block px-3 py-2 text-base font-medium text-white bg-ember-600 rounded-lg hover:bg-ember-700 transition-colors text-center">
+        {t('nav.getStarted')}
+      </a>
+      <div class="mt-4 px-3">
+        <LanguagePicker />
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        // Close mobile menu if open
+        mobileMenu?.classList.add('hidden');
+        
+        // Calculate offset for fixed navbar
+        const navHeight = 64; // 16 * 4 (h-16)
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Active section highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  
+  function updateActiveLink() {
+    const scrollPosition = window.scrollY + 100;
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+      
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        navLinks.forEach(link => {
+          link.classList.remove('text-ember-600', 'dark:text-ember-400', 'bg-ember-50', 'dark:bg-ember-900/20');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('text-ember-600', 'dark:text-ember-400', 'bg-ember-50', 'dark:bg-ember-900/20');
+          }
+        });
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', updateActiveLink);
+  updateActiveLink();
+</script>
+
+<style>
+  /* Smooth scroll offset for fixed navbar */
+  :global(section) {
+    scroll-margin-top: 64px;
+  }
+</style>

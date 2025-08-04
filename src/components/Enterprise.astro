@@ -1,0 +1,191 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+const lang = Astro.currentLocale || 'en';
+const t = useTranslations(lang);
+
+const features = [
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+    </svg>`,
+    title: t('enterprise.security.title'),
+    description: t('enterprise.security.desc')
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+    </svg>`,
+    title: t('enterprise.architecture.title'),
+    description: t('enterprise.architecture.desc')
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+    </svg>`,
+    title: t('enterprise.training.title'),
+    description: t('enterprise.training.desc')
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+    </svg>`,
+    title: t('enterprise.generators.title'),
+    description: t('enterprise.generators.desc')
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+    </svg>`,
+    title: t('enterprise.custom.title'),
+    description: t('enterprise.custom.desc')
+  }
+];
+
+const builderFeatures = [
+  t('enterprise.builder.feature1'),
+  t('enterprise.builder.feature2'),
+  t('enterprise.builder.feature3'),
+  t('enterprise.builder.feature4'),
+  t('enterprise.builder.feature5'),
+  t('enterprise.builder.feature6')
+];
+---
+
+<section id="enterprise" class="py-20 lg:py-32 bg-gray-900 text-white relative overflow-hidden">
+  <!-- Background decoration -->
+  <div class="absolute inset-0">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-ember-600/20 rounded-full filter blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-flame-600/20 rounded-full filter blur-3xl"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-yellow-300 bg-yellow-900 rounded-full">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+        </svg>
+        {t('enterprise.badge')}
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+        {t('enterprise.title')} <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">{t('enterprise.titleHighlight')}</span>
+      </h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        {t('enterprise.subtitle')}
+      </p>
+    </div>
+
+    <!-- Consulting Services -->
+    <div class="mb-20">
+      <h3 class="text-2xl md:text-3xl font-bold text-center mb-12">
+        {t('enterprise.consulting')}
+      </h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {features.map((feature) => (
+          <div class="bg-gray-800 rounded-xl p-6 hover:bg-gray-750 transition-colors">
+            <div class="w-12 h-12 bg-ember-600 rounded-lg flex items-center justify-center mb-4 text-white">
+              <Fragment set:html={feature.icon} />
+            </div>
+            <h4 class="text-lg font-semibold mb-2">{feature.title}</h4>
+            <p class="text-gray-400 text-sm">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Embrex Builder -->
+    <div class="bg-gradient-to-r from-ember-600 to-flame-600 rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+      <div class="relative z-10">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-ember-200 bg-ember-800 rounded-full">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+              </svg>
+              {t('enterprise.builder.badge')}
+            </div>
+            <h3 class="text-3xl lg:text-4xl font-bold mb-4">
+              {t('enterprise.builder.title')}
+            </h3>
+            <p class="text-lg text-ember-100 mb-6">
+              {t('enterprise.builder.desc')}
+            </p>
+            <ul class="space-y-3 mb-8">
+              {builderFeatures.map((feature) => (
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-white mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="text-ember-100">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="#testimonials" class="inline-flex items-center px-6 py-3 bg-white text-ember-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+              {t('enterprise.builder.cta')}
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+          <div class="relative">
+            <div class="bg-gray-900 rounded-xl p-6 shadow-2xl">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="text-white font-semibold">{t('enterprise.builder.interface')}</h4>
+                <div class="flex space-x-2">
+                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="bg-gray-800 rounded p-3">
+                  <div class="text-gray-400 text-xs mb-1">{t('enterprise.builder.entityDesigner')}</div>
+                  <div class="bg-gray-700 rounded p-2 text-sm text-gray-300">
+                    <span class="text-blue-400">Product</span> {`{ name: string, price: decimal }`}
+                  </div>
+                </div>
+                <div class="bg-gray-800 rounded p-3">
+                  <div class="text-gray-400 text-xs mb-1">{t('enterprise.builder.relationsBuilder')}</div>
+                  <div class="flex items-center text-sm">
+                    <span class="text-green-400">Product</span>
+                    <svg class="w-4 h-4 mx-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                    <span class="text-purple-400">Category</span>
+                  </div>
+                </div>
+                <div class="bg-gray-800 rounded p-3">
+                  <div class="text-gray-400 text-xs mb-1">{t('enterprise.builder.preview')}</div>
+                  <div class="text-xs text-gray-300">
+                    <div class="text-yellow-400">// {t('enterprise.builder.codePreview')}</div>
+                    <div>class Product extends Entity {`{...}`}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-20 text-center">
+      <h3 class="text-2xl md:text-3xl font-bold mb-4">
+        {t('enterprise.cta.title')}
+      </h3>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+        {t('enterprise.cta.desc')}
+      </p>
+      <div class="flex justify-center">
+        <a href="#testimonials" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-ember-600 to-flame-600 text-white font-semibold rounded-lg hover:from-ember-700 hover:to-flame-700 transition-all duration-200 transform hover:scale-105">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          {t('enterprise.cta.button')}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,227 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+const lang = Astro.currentLocale || 'en';
+const t = useTranslations(lang);
+---
+
+<section id="architecture" class="py-20 lg:py-32 bg-white dark:bg-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-blue-600 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+        </svg>
+        {t('architecture.badge')}
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        {t('architecture.title')} <span class="text-transparent bg-clip-text bg-gradient-to-r from-ember-600 to-flame-600">{t('architecture.titleHighlight')}</span>
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        {t('architecture.subtitle')}
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <!-- Standard Architecture -->
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16"></div>
+        <div class="relative z-10">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{t('architecture.standard.title')}</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400">{t('architecture.standard.subtitle')}</p>
+            </div>
+          </div>
+
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            {t('architecture.standard.desc1')} <code class="text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-300 px-2 py-1 rounded">src/Entity/</code> {t('architecture.standard.desc2')} <code class="text-blue-600 bg-blue-100 dark:bg-blue-900 dark:text-blue-300 px-2 py-1 rounded">src/Repository/</code>.
+          </p>
+
+          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 font-mono text-sm mb-6">
+            <div class="text-gray-600 dark:text-gray-400">src/</div>
+            <div class="ml-4 space-y-1">
+              <div class="text-blue-600 dark:text-blue-400">├── Entity/</div>
+              <div class="text-gray-700 dark:text-gray-300">│   ├── Product.php</div>
+              <div class="text-gray-700 dark:text-gray-300">│   └── Category.php</div>
+              <div class="text-blue-600 dark:text-blue-400">├── Repository/</div>
+              <div class="text-gray-700 dark:text-gray-300">│   ├── ProductRepository.php</div>
+              <div class="text-gray-700 dark:text-gray-300">│   └── CategoryRepository.php</div>
+              <div class="text-blue-600 dark:text-blue-400">├── Controller/</div>
+              <div class="text-blue-600 dark:text-blue-400">└── Form/</div>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-center text-sm">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">{t('architecture.standard.benefit1')}</span>
+            </div>
+            <div class="flex items-center text-sm">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">{t('architecture.standard.benefit2')}</span>
+            </div>
+            <div class="flex items-center text-sm">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">{t('architecture.standard.benefit3')}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hexagonal Architecture -->
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-flame-500/10 rounded-full -mr-16 -mt-16"></div>
+        <div class="relative z-10">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-flame-100 dark:bg-flame-900 rounded-lg flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-flame-600 dark:text-flame-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{t('architecture.hexagonal.title')}</h3>
+              <p class="text-sm text-gray-600 dark:text-gray-400">{t('architecture.hexagonal.subtitle')}</p>
+            </div>
+          </div>
+
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            {t('architecture.hexagonal.desc')}
+          </p>
+
+          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 font-mono text-sm mb-6">
+            <div class="text-gray-600 dark:text-gray-400">src/</div>
+            <div class="ml-4 space-y-1">
+              <div class="text-flame-600 dark:text-flame-400">├── Catalog/</div>
+              <div class="text-gray-600 dark:text-gray-400">│   ├── Domain/</div>
+              <div class="text-gray-700 dark:text-gray-300">│   │   ├── Entity/Product.php</div>
+              <div class="text-gray-700 dark:text-gray-300">│   │   └── ValueObject/Money.php</div>
+              <div class="text-gray-600 dark:text-gray-400">│   ├── Application/</div>
+              <div class="text-gray-600 dark:text-gray-400">│   └── Infrastructure/</div>
+              <div class="text-flame-600 dark:text-flame-400">└── Ordering/</div>
+              <div class="text-gray-600 dark:text-gray-400">    ├── Domain/</div>
+              <div class="text-gray-600 dark:text-gray-400">    └── Application/</div>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-center text-sm">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">{t('architecture.hexagonal.benefit1')}</span>
+            </div>
+            <div class="flex items-center text-sm">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">{t('architecture.hexagonal.benefit2')}</span>
+            </div>
+            <div class="flex items-center text-sm">
+              <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300">{t('architecture.hexagonal.benefit3')}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Examples -->
+    <div class="mt-16 grid lg:grid-cols-2 gap-8">
+      <div>
+        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('architecture.standardConfig')}</h4>
+        <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto">
+          <pre class="text-green-400 text-sm"><code>{`namespaces:
+  entity: 'App\\Entity'
+  repository: 'App\\Repository'
+  form: 'App\\Form'
+
+paths:
+  entity: 'src/Entity'
+  repository: 'src/Repository'
+  form: 'src/Form'
+
+entities:
+  Product:
+    properties:
+      sku: 'string(50)'
+      name: 'string(255)'
+      price: 'decimal(10,2)'
+      stock: 'integer'
+      isActive: 'boolean'
+    relations:
+      category: 'manyToOne(Category)'
+
+  Category:
+    properties:
+      name: 'string(100)'
+      slug: 'string(100)'
+    relations:
+      products: 'oneToMany(Product)'`}</code></pre>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{t('architecture.hexagonalConfig')}</h4>
+        <div class="bg-gray-900 rounded-lg p-4 overflow-x-auto">
+          <pre class="text-green-400 text-sm"><code>{`# Use the hexagonal convention
+convention: hexagonal
+
+contexts:
+  Catalog:
+    entities:
+      Product:
+        properties:
+          sku: string(50)
+          name: string(255)
+          price: decimal(10,2)
+        relations:
+          category: manyToOne(Category)
+
+      Category:
+        properties:
+          name: string(100)
+          slug: string(100)
+        relations:
+          products: oneToMany(Product)
+
+  User:
+    entities:
+      User:
+        properties:
+          email: string(180)
+          username: string(100)`}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Migration Path -->
+    <div class="mt-16 bg-gradient-to-r from-ember-600 to-flame-600 rounded-2xl p-8 text-white">
+      <div class="text-center">
+        <h3 class="text-2xl font-bold mb-4">{t('architecture.migration.title')}</h3>
+        <p class="text-lg opacity-90 max-w-3xl mx-auto mb-8">
+          {t('architecture.migration.desc')}
+        </p>
+        <a href="#testimonials" class="inline-flex items-center px-6 py-3 bg-white/20 rounded-lg backdrop-blur-sm hover:bg-white/30 transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+          <span class="font-medium">{t('architecture.migration.cta')}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

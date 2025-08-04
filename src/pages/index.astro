@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Problem from '../components/Problem.astro';
+import Features from '../components/Features.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import CodeExample from '../components/CodeExample.astro';
+import Architecture from '../components/Architecture.astro';
+import Integrations from '../components/Integrations.astro';
+import Enterprise from '../components/Enterprise.astro';
+import Testimonials from '../components/Testimonials.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Symfony Codex - Generate Symfony Code from YAML">
+  <main>
+    <Hero />
+    <Problem />
+    <Features />
+    <HowItWorks />
+    <CodeExample />
+    <Architecture />
+    <Integrations />
+    <Enterprise />
+    <Testimonials />
+    <CTA />
+    <Footer />
+  </main>
+
+  <style>
+    main {
+      overflow-x: hidden;
+    }
+  </style>
+</Layout>
