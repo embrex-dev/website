@@ -5,16 +5,16 @@ const lang = Astro.currentLocale || 'en';
 const t = useTranslations(lang);
 ---
 
-<section id="code-example" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800">
+<section id="code-example" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800" aria-labelledby="code-example-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <div class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-flame-600 bg-flame-100 rounded-full dark:bg-flame-900 dark:text-flame-300">
+      <div class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-flame-700 bg-flame-100 rounded-full dark:bg-flame-900 dark:text-flame-300">
         <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
         </svg>
         {t('codeExample.badge')}
       </div>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 id="code-example-heading" class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
         {t('codeExample.title')} <span class="text-transparent bg-clip-text bg-gradient-to-r from-ember-600 to-flame-600">{t('codeExample.titleHighlight')}</span>
       </h2>
       <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
@@ -27,11 +27,11 @@ const t = useTranslations(lang);
       <!-- Before -->
       <div class="relative">
         <div class="absolute -top-4 left-4 px-4 py-2 bg-red-600 text-white font-semibold rounded-lg shadow-lg z-10">
-          ❌ {t('codeExample.without')}
+          <span aria-hidden="true">❌</span> {t('codeExample.without')}
         </div>
         <div class="bg-gray-900 rounded-2xl p-6 pt-12 h-full">
-          <div class="overflow-y-auto custom-scrollbar">
-            <pre class="text-gray-300 text-sm leading-relaxed"><code>{`// src/Entity/Product.php
+          <div class="overflow-y-auto custom-scrollbar" tabindex="0" role="region" aria-label="Code example without Embrex">
+            <pre class="text-gray-300 text-sm leading-relaxed" aria-label="PHP code example"><code>{`// src/Entity/Product.php
 <?php
 
 namespace App\\Entity;
@@ -90,13 +90,13 @@ class Product
       <!-- After -->
       <div class="relative">
         <div class="absolute -top-4 left-4 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-lg z-10">
-          ✅ {t('codeExample.with')}
+          <span aria-hidden="true">✅</span> {t('codeExample.with')}
         </div>
-        <div class="bg-gray-900 rounded-2xl p-6 pt-12 h-full">
+        <div class="bg-gray-900 rounded-2xl p-6 pt-12 h-full" role="region" aria-label="Code example with Embrex">
           <div class="space-y-6">
             <div>
-              <div class="text-gray-500 text-sm mb-2"># schema.yaml</div>
-              <pre class="text-green-400 text-sm leading-relaxed"><code>{`entities:
+              <div class="text-gray-600 dark:text-gray-400 text-sm mb-2" id="schema-label"># schema.yaml</div>
+              <pre class="text-green-400 text-sm leading-relaxed" aria-labelledby="schema-label"><code>{`entities:
   Product:
     properties:
       sku: string(50)
@@ -134,17 +134,17 @@ validation:
             </div>
 
             <div class="border-t border-gray-700 pt-6">
-              <div class="text-gray-500 text-sm mb-3">$ {t('codeExample.runCommand')}:</div>
-              <div class="bg-black rounded-lg p-4">
+              <div class="text-gray-600 dark:text-gray-400 text-sm mb-3" id="command-label">$ {t('codeExample.runCommand')}:</div>
+              <div class="bg-black rounded-lg p-4" role="region" aria-labelledby="command-label">
                 <code class="text-green-400">php bin/console embrex:build</code>
               </div>
             </div>
 
             <div class="border-t border-gray-700 pt-6">
-              <div class="text-gray-500 text-sm mb-3">✨ {t('codeExample.generated')}:</div>
-              <div class="space-y-2 text-sm">
-                <div class="flex items-center text-gray-300">
-                  <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <div class="text-gray-600 dark:text-gray-400 text-sm mb-3" id="generated-label"><span aria-hidden="true">✨</span> {t('codeExample.generated')}:</div>
+              <div class="space-y-2 text-sm" role="list" aria-labelledby="generated-label">
+                <div class="flex items-center text-gray-300" role="listitem">
+                  <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                   </svg>
                   {t('codeExample.generated1')}
@@ -181,25 +181,25 @@ validation:
     </div>
 
     <!-- Time Saved -->
-    <div class="mt-12 bg-gradient-to-r from-ember-600 to-flame-600 rounded-2xl p-8 text-white text-center">
+    <div class="mt-12 bg-gradient-to-r from-ember-600 to-flame-600 rounded-2xl p-8 text-white text-center" role="region" aria-labelledby="time-saved-heading">
       <div class="max-w-4xl mx-auto">
-        <h3 class="text-2xl md:text-3xl font-bold mb-4">
+        <h3 id="time-saved-heading" class="text-2xl md:text-3xl font-bold mb-4">
           {t('codeExample.timeSaved')} <span class="text-white font-extrabold">{t('codeExample.timeSavedAmount')}</span> {t('codeExample.timeSavedSuffix')}
         </h3>
         <p class="text-lg opacity-90 mb-6">
           {t('codeExample.imagineText')}
         </p>
-        <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-          <div>
-            <div class="text-3xl md:text-4xl font-bold text-white">10+</div>
+        <div class="grid grid-cols-3 gap-8 max-w-2xl mx-auto" role="list" aria-label="Time savings statistics">
+          <div role="listitem">
+            <div class="text-3xl md:text-4xl font-bold text-white" aria-label="10 plus files saved">10+</div>
             <div class="text-sm opacity-75">{t('codeExample.stat1Label')}</div>
           </div>
-          <div>
-            <div class="text-3xl md:text-4xl font-bold text-white">100%</div>
+          <div role="listitem">
+            <div class="text-3xl md:text-4xl font-bold text-white" aria-label="100 percent consistency">100%</div>
             <div class="text-sm opacity-75">{t('codeExample.stat2Label')}</div>
           </div>
-          <div>
-            <div class="text-3xl md:text-4xl font-bold text-white">0</div>
+          <div role="listitem">
+            <div class="text-3xl md:text-4xl font-bold text-white" aria-label="0 errors">0</div>
             <div class="text-sm opacity-75">{t('codeExample.stat3Label')}</div>
           </div>
         </div>

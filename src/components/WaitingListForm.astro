@@ -5,8 +5,8 @@ const lang = Astro.currentLocale || 'en';
 const t = useTranslations(lang);
 ---
 
-<div id="waiting-list-form" class="max-w-md mx-auto" data-sending={t('form.sending')} data-error={t('form.error')}>
-  <form class="space-y-4" action="https://formsubmit.co/959a4f9f4ed869101d3edadb32d2a9f1 " method="POST">
+<div id="waiting-list-form" class="max-w-md mx-auto" data-sending={t('form.sending')} data-error={t('form.error')} role="form">
+  <form class="space-y-4" action="https://formsubmit.co/959a4f9f4ed869101d3edadb32d2a9f1 " method="POST" novalidate>
     <!-- FormSubmit configuration -->
     <input type="hidden" name="_subject" value={t('form.emailSubject')}>
     <input type="hidden" name="_captcha" value="false">
@@ -23,9 +23,11 @@ const t = useTranslations(lang);
         name="name"
         id="name"
         required
+        aria-describedby="name-error"
         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ember-500 focus:border-transparent transition-colors"
         placeholder={t('form.fullNamePlaceholder')}
       />
+      <div id="name-error" class="text-red-600 text-sm hidden" role="alert"></div>
     </div>
 
     <div>
@@ -37,9 +39,11 @@ const t = useTranslations(lang);
         name="email"
         id="email"
         required
+        aria-describedby="email-error"
         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ember-500 focus:border-transparent transition-colors"
         placeholder={t('form.emailPlaceholder')}
       />
+      <div id="email-error" class="text-red-600 text-sm hidden" role="alert"></div>
     </div>
 
     <div>
@@ -50,9 +54,11 @@ const t = useTranslations(lang);
         type="text"
         name="company"
         id="company"
+        aria-describedby="company-help"
         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ember-500 focus:border-transparent transition-colors"
         placeholder={t('form.companyPlaceholder')}
       />
+      <div id="company-help" class="text-gray-600 dark:text-gray-400 text-sm">{t('form.companyOptional') || 'Optional'}</div>
     </div>
 
     <div>
@@ -63,26 +69,30 @@ const t = useTranslations(lang);
         name="use-case"
         id="use-case"
         rows="3"
+        aria-describedby="use-case-help"
         class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-ember-500 focus:border-transparent transition-colors resize-none"
         placeholder={t('form.useCasePlaceholder')}
       ></textarea>
+      <div id="use-case-help" class="text-gray-600 dark:text-gray-400 text-sm">{t('form.useCaseOptional') || 'Optional - helps us understand your needs'}</div>
     </div>
 
     <button
       type="submit"
-      class="w-full px-6 py-3 bg-gradient-to-r from-ember-600 to-flame-600 text-white font-semibold rounded-lg hover:from-ember-700 hover:to-flame-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ember-500"
+      class="w-full px-6 py-3 bg-gradient-to-r from-ember-600 to-flame-600 text-white font-semibold rounded-lg hover:from-ember-700 hover:to-flame-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ember-500 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+      aria-describedby="form-status"
     >
       {t('form.submit')}
     </button>
+    <div id="form-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
-    <p class="text-xs text-center text-gray-500 dark:text-gray-400 mt-4">
+    <p class="text-xs text-center text-gray-600 dark:text-gray-400 mt-4">
       {t('form.privacy')}
     </p>
   </form>
 
-  <div id="success-message" class="hidden">
+  <div id="success-message" class="hidden" role="alert" aria-live="assertive">
     <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 text-center">
-      <svg class="w-12 h-12 text-green-500 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+      <svg class="w-12 h-12 text-green-500 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
       </svg>
       <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
@@ -100,12 +110,78 @@ const t = useTranslations(lang);
   const form = document.querySelector('#waiting-list-form form') as HTMLFormElement;
   const successMessage = document.getElementById('success-message');
 
+  function showFieldError(fieldId: string, message: string) {
+    const errorElement = document.getElementById(`${fieldId}-error`);
+    const field = document.getElementById(fieldId) as HTMLInputElement;
+    if (errorElement && field) {
+      errorElement.textContent = message;
+      errorElement.classList.remove('hidden');
+      field.classList.add('border-red-500');
+      field.setAttribute('aria-invalid', 'true');
+    }
+  }
+
+  function clearFieldError(fieldId: string) {
+    const errorElement = document.getElementById(`${fieldId}-error`);
+    const field = document.getElementById(fieldId) as HTMLInputElement;
+    if (errorElement && field) {
+      errorElement.textContent = '';
+      errorElement.classList.add('hidden');
+      field.classList.remove('border-red-500');
+      field.setAttribute('aria-invalid', 'false');
+    }
+  }
+
+  function validateForm(): boolean {
+    let isValid = true;
+    const nameField = document.getElementById('name') as HTMLInputElement;
+    const emailField = document.getElementById('email') as HTMLInputElement;
+
+    // Clear previous errors
+    clearFieldError('name');
+    clearFieldError('email');
+
+    // Validate name
+    if (!nameField.value.trim()) {
+      showFieldError('name', 'Name is required');
+      isValid = false;
+    }
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailField.value.trim()) {
+      showFieldError('email', 'Email is required');
+      isValid = false;
+    } else if (!emailRegex.test(emailField.value)) {
+      showFieldError('email', 'Please enter a valid email address');
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
   if (form && successMessage) {
+    // Add real-time validation
+    const fields = ['name', 'email'];
+    fields.forEach(fieldId => {
+      const field = document.getElementById(fieldId) as HTMLInputElement;
+      field?.addEventListener('blur', () => {
+        if (field.value.trim()) {
+          clearFieldError(fieldId);
+        }
+      });
+    });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      if (!validateForm()) {
+        return;
+      }
+
       const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
       const originalText = submitButton.textContent;
+      const formStatus = document.getElementById('form-status');
 
       // Show loading state
       submitButton.disabled = true;
@@ -114,6 +190,9 @@ const t = useTranslations(lang);
       const errorText = waitingListDiv?.getAttribute('data-error') || 'An error occurred. Please try again.';
 
       submitButton.textContent = sendingText;
+      if (formStatus) {
+        formStatus.textContent = sendingText;
+      }
 
       try {
         const response = await fetch(form.action, {
@@ -128,6 +207,10 @@ const t = useTranslations(lang);
           // Hide form and show success message
           form.style.display = 'none';
           successMessage.classList.remove('hidden');
+          successMessage.focus();
+          if (formStatus) {
+            formStatus.textContent = 'Form submitted successfully!';
+          }
         } else {
           throw new Error('Submission failed');
         }
@@ -135,7 +218,20 @@ const t = useTranslations(lang);
         // Reset button and show error
         submitButton.disabled = false;
         submitButton.textContent = originalText;
-        alert(errorText);
+        if (formStatus) {
+          formStatus.textContent = errorText;
+        }
+        // Show error message in a more accessible way
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'text-red-600 text-sm mt-2 p-3 border border-red-200 rounded-lg bg-red-50';
+        errorDiv.setAttribute('role', 'alert');
+        errorDiv.textContent = errorText;
+        form.appendChild(errorDiv);
+        
+        // Remove error message after 5 seconds
+        setTimeout(() => {
+          errorDiv.remove();
+        }, 5000);
       }
     });
   }

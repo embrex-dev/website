@@ -194,7 +194,7 @@ export const translations = {
     'integrations.example.webhookFeature3': 'Retry & error handling',
     'integrations.custom.title': 'Need More?',
     'integrations.custom.desc': 'Create your own custom integrations with our extensible architecture. Additional integrations for Sylius, Sonata Admin, and more are available in our Enterprise offering.',
-    'integrations.custom.learnMore': 'Learn More',
+    'integrations.custom.learnMore': 'Learn More About Custom Integrations',
     'integrations.custom.exploreEnterprise': 'Explore Enterprise',
 
     // Enterprise
@@ -250,6 +250,7 @@ export const translations = {
     'cta.feature2.desc': 'Best practices included',
     'cta.feature3.title': '100% Customizable',
     'cta.feature3.desc': 'Your code, your way',
+    'cta.copyCommand': 'Copy command to clipboard',
 
     // Footer
     'footer.tagline': 'The future of Symfony development',
@@ -518,7 +519,7 @@ export const translations = {
     'integrations.example.webhookFeature3': 'Gestion des retry & erreurs',
     'integrations.custom.title': 'Besoin de Plus ?',
     'integrations.custom.desc': 'Créer ses propres intégrations personnalisées avec notre architecture extensible. Des intégrations supplémentaires pour Sylius, Sonata Admin, et plus sont disponibles dans notre offre Entreprise.',
-    'integrations.custom.learnMore': 'En Savoir Plus',
+    'integrations.custom.learnMore': 'En savoir plus sur les intégrations personnalisées',
     'integrations.custom.exploreEnterprise': 'Explorer l\'Offre Entreprise',
     'integrations.oneSchema': 'Un Schéma, Plusieurs Intégrations',
     'integrations.defineOnce': 'Définir une fois...',
@@ -585,6 +586,7 @@ export const translations = {
     'cta.feature2.desc': 'Bonnes pratiques incluses',
     'cta.feature3.title': '100% Personnalisable',
     'cta.feature3.desc': 'Votre code, à votre façon',
+    'cta.copyCommand': 'Copier la commande',
 
     // Footer
     'footer.tagline': 'Le futur du développement Symfony',

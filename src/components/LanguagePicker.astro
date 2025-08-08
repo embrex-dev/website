@@ -22,12 +22,13 @@ function getLocalizedPath(locale: string) {
     id="language-menu-button"
     aria-expanded="false"
     aria-haspopup="true"
+    aria-label="Select language"
   >
-    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
     </svg>
     {languages[currentLocale as keyof typeof languages]}
-    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
     </svg>
   </button>
@@ -44,13 +45,14 @@ function getLocalizedPath(locale: string) {
       {Object.entries(languages).map(([locale, label]) => (
         <a
           href={getLocalizedPath(locale)}
-          class={`block px-4 py-2 text-sm ${
+          class={`block px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ember-500 focus:ring-offset-2 ${
             currentLocale === locale
               ? 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-white'
               : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700'
           }`}
           role="menuitem"
           tabindex="-1"
+          aria-current={currentLocale === locale ? 'page' : undefined}
         >
           {label}
         </a>
@@ -63,14 +65,70 @@ function getLocalizedPath(locale: string) {
   const button = document.getElementById('language-menu-button');
   const menu = document.getElementById('language-menu');
   
-  button?.addEventListener('click', () => {
+  function toggleMenu() {
+    const isOpen = !menu?.classList.contains('hidden');
     menu?.classList.toggle('hidden');
+    button?.setAttribute('aria-expanded', (!isOpen).toString());
+  }
+
+  button?.addEventListener('click', toggleMenu);
+  
+  // Handle keyboard navigation
+  button?.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      menu?.classList.remove('hidden');
+      button?.setAttribute('aria-expanded', 'true');
+      const firstItem = menu?.querySelector('a[role="menuitem"]') as HTMLElement;
+      firstItem?.focus();
+    } else if (e.key === 'Escape') {
+      menu?.classList.add('hidden');
+      button?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Handle keyboard navigation in menu items
+  menu?.addEventListener('keydown', (e) => {
+    const items = Array.from(menu.querySelectorAll('a[role="menuitem"]')) as HTMLElement[];
+    const currentIndex = items.findIndex(item => item === document.activeElement);
+    
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        const nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
+        items[nextIndex]?.focus();
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
+        items[prevIndex]?.focus();
+        break;
+      case 'Escape':
+        e.preventDefault();
+        menu?.classList.add('hidden');
+        button?.setAttribute('aria-expanded', 'false');
+        button?.focus();
+        break;
+      case 'Tab':
+        menu?.classList.add('hidden');
+        button?.setAttribute('aria-expanded', 'false');
+        break;
+    }
   });
   
   // Close menu when clicking outside
   document.addEventListener('click', (e) => {
     if (!button?.contains(e.target as Node) && !menu?.contains(e.target as Node)) {
       menu?.classList.add('hidden');
+      button?.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close menu on blur
+  document.addEventListener('focusin', (e) => {
+    if (!button?.contains(e.target as Node) && !menu?.contains(e.target as Node)) {
+      menu?.classList.add('hidden');
+      button?.setAttribute('aria-expanded', 'false');
     }
   });
 </script>

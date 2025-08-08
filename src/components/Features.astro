@@ -56,7 +56,7 @@ const features = [
 ];
 ---
 
-<section id="features" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800">
+<section id="features" class="py-20 lg:py-32 bg-gray-50 dark:bg-gray-800" aria-labelledby="features-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
       <div class="inline-flex items-center px-4 py-2 mb-4 text-sm font-medium text-green-600 bg-green-100 rounded-full dark:bg-green-900 dark:text-green-300">
@@ -65,7 +65,7 @@ const features = [
         </svg>
         {t('features.badge')}
       </div>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 id="features-heading" class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
         {t('features.title')} <span class="text-transparent bg-clip-text bg-gradient-to-r from-ember-600 to-flame-600">{t('features.titleHighlight')}</span>
       </h2>
       <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
@@ -73,24 +73,24 @@ const features = [
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {features.map((feature) => (
-        <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-          <div class={`w-12 h-12 bg-${feature.color}-100 dark:bg-${feature.color}-900 rounded-lg flex items-center justify-center mb-4`}>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" role="list">
+      {features.map((feature, index) => (
+        <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" role="listitem">
+          <div class={`w-12 h-12 bg-${feature.color}-100 dark:bg-${feature.color}-900 rounded-lg flex items-center justify-center mb-4`} aria-hidden="true">
             <div class={`text-${feature.color}-600 dark:text-${feature.color}-400`} set:html={feature.icon} />
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
-          <p class="text-gray-600 dark:text-gray-300">{feature.description}</p>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2" id={`feature-${index}`}>{feature.title}</h3>
+          <p class="text-gray-600 dark:text-gray-300" aria-labelledby={`feature-${index}`}>{feature.description}</p>
         </div>
       ))}
     </div>
 
     <!-- Additional Features -->
     <div class="mt-16 bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg">
-      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">{t('features.andMore')}</h3>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="flex items-center">
-          <svg class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center" id="additional-features">{t('features.andMore')}</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-labelledby="additional-features">
+        <div class="flex items-center" role="listitem">
+          <svg class="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
           </svg>
           <span class="text-gray-700 dark:text-gray-300">{t('features.more.validation')}</span>

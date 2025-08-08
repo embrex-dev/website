@@ -6,11 +6,11 @@ const lang = Astro.currentLocale || 'en';
 const t = useTranslations(lang);
 ---
 
-<Layout title={t('privacy.title')}>
+<Layout title={t('privacy.title')} lang="en">
   <div class="min-h-screen bg-white dark:bg-gray-900">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        <h1 id="privacy-heading" class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
           {t('privacy.title')}
         </h1>
         <p class="text-xl text-gray-600 dark:text-gray-300">
@@ -18,7 +18,7 @@ const t = useTranslations(lang);
         </p>
       </div>
 
-      <div class="prose prose-lg max-w-none dark:prose-invert">
+      <div class="prose prose-lg max-w-none dark:prose-invert" role="main" aria-labelledby="privacy-heading">
         <h2>{t('privacy.dataCollection.title')}</h2>
         <p>{t('privacy.dataCollection.content')}</p>
 

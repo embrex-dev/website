@@ -5,9 +5,9 @@ const lang = Astro.currentLocale || 'en';
 const t = useTranslations(lang);
 ---
 
-<section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-ember-50 via-white to-flame-50 dark:from-gray-900 dark:via-gray-800 dark:to-ember-900">
+<section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-ember-50 via-white to-flame-50 dark:from-gray-900 dark:via-gray-800 dark:to-ember-900" aria-labelledby="hero-heading">
   <!-- Background decoration -->
-  <div class="absolute inset-0 overflow-hidden">
+  <div class="absolute inset-0 overflow-hidden" aria-hidden="true">
     <div class="absolute -top-40 -right-40 w-80 h-80 bg-flame-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 float-animation"></div>
     <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-ember-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 float-animation" style="animation-delay: 2s;"></div>
     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-orange-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 float-animation" style="animation-delay: 4s;"></div>
@@ -15,15 +15,15 @@ const t = useTranslations(lang);
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <!-- Badge -->
-    <div class="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium text-ember-600 bg-ember-100 rounded-full dark:bg-ember-900 dark:text-ember-300 fade-in">
-      <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+    <div class="inline-flex items-center px-4 py-2 mb-8 text-sm font-medium text-ember-700 bg-ember-100 rounded-full dark:bg-ember-900 dark:text-ember-200 fade-in">
+      <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
         <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
       </svg>
       {t('hero.badge')}
     </div>
 
     <!-- Main heading -->
-    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 fade-in" style="animation-delay: 0.1s;">
+    <h1 id="hero-heading" class="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6 fade-in" style="animation-delay: 0.1s;">
       {t('hero.title1')}<br />
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-ember-600 to-flame-600">{t('hero.title2')}</span>
     </h1>
@@ -35,8 +35,8 @@ const t = useTranslations(lang);
 
     <!-- CTA Button -->
     <div class="flex justify-center mb-12 fade-in" style="animation-delay: 0.3s;">
-      <a href="#how-it-works" class="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-ember-600 rounded-lg hover:bg-ember-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
-        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+      <a href="#how-it-works" class="inline-flex items-center px-8 py-4 text-lg font-medium text-white bg-ember-600 rounded-lg hover:bg-ember-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-ember-500 focus:ring-offset-2">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
         </svg>
         {t('nav.getStarted')}
@@ -44,26 +44,26 @@ const t = useTranslations(lang);
     </div>
 
     <!-- Coming Soon Notice -->
-    <div class="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 max-w-2xl mx-auto fade-in" style="animation-delay: 0.4s;">
-      <a href="#testimonials" class="flex items-center justify-center group">
-        <code class="text-yellow-400 font-mono text-sm md:text-base group-hover:text-yellow-300 transition-colors">
+    <div class="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 max-w-2xl mx-auto fade-in" style="animation-delay: 0.4s;" role="banner">
+      <a href="#testimonials" class="flex items-center justify-center group focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-lg">
+        <code class="text-yellow-300 font-mono text-sm md:text-base group-hover:text-yellow-200 transition-colors">
           {t('hero.comingSoon')}
         </code>
       </a>
     </div>
 
     <!-- Stats -->
-    <div class="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto fade-in" style="animation-delay: 0.5s;">
+    <div class="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto fade-in" style="animation-delay: 0.5s;" role="region" aria-label="Key statistics">
       <div class="text-center">
-        <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{t('hero.stat1')}</div>
+        <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white" aria-label={`${t('hero.stat1')} ${t('hero.stat1Label')}`}>{t('hero.stat1')}</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">{t('hero.stat1Label')}</div>
       </div>
       <div class="text-center">
-        <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{t('hero.stat2')}</div>
+        <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white" aria-label={`${t('hero.stat2')} ${t('hero.stat2Label')}`}>{t('hero.stat2')}</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">{t('hero.stat2Label')}</div>
       </div>
       <div class="text-center">
-        <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">{t('hero.stat3')}</div>
+        <div class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white" aria-label={`${t('hero.stat3')} ${t('hero.stat3Label')}`}>{t('hero.stat3')}</div>
         <div class="text-sm text-gray-600 dark:text-gray-400">{t('hero.stat3Label')}</div>
       </div>
     </div>
@@ -71,8 +71,8 @@ const t = useTranslations(lang);
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 fade-in" style="animation-delay: 0.6s;">
-    <a href="#problem" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
-      <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <a href="#problem" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ember-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Scroll to next section">
+      <svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
       </svg>
     </a>

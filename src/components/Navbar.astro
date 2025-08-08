@@ -33,7 +33,7 @@ const navItems = [
         {navItems.map((item) => (
           <a 
             href={item.href}
-            class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-ember-600 dark:text-gray-300 dark:hover:text-ember-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-ember-600 dark:text-gray-300 dark:hover:text-ember-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-ember-500 focus:ring-offset-2"
           >
             {item.label}
           </a>
@@ -42,7 +42,7 @@ const navItems = [
 
       <!-- CTA Button and Language Picker -->
       <div class="hidden md:flex items-center space-x-4">
-        <a href="#how-it-works" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-ember-600 rounded-lg hover:bg-ember-700 transition-colors">
+        <a href="#how-it-works" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-ember-600 rounded-lg hover:bg-ember-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ember-500 focus:ring-offset-2">
           {t('nav.getStarted')}
         </a>
         <LanguagePicker />
@@ -51,10 +51,13 @@ const navItems = [
       <!-- Mobile Menu Button -->
       <button 
         type="button"
-        class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-ember-500 focus:ring-offset-2"
         id="mobile-menu-button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={t('nav.mobileMenuToggle') || 'Toggle mobile menu'}
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
@@ -62,17 +65,17 @@ const navItems = [
   </div>
 
   <!-- Mobile Menu -->
-  <div class="hidden md:hidden" id="mobile-menu">
+  <div class="hidden md:hidden" id="mobile-menu" role="navigation" aria-label={t('nav.mobileNavigation') || 'Mobile navigation'}>
     <div class="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
       {navItems.map((item) => (
         <a 
           href={item.href}
-          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-ember-600 dark:text-gray-300 dark:hover:text-ember-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+          class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-ember-600 dark:text-gray-300 dark:hover:text-ember-400 transition-colors rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-ember-500 focus:ring-offset-2"
         >
           {item.label}
         </a>
       ))}
-      <a href="#how-it-works" class="block px-3 py-2 text-base font-medium text-white bg-ember-600 rounded-lg hover:bg-ember-700 transition-colors text-center">
+      <a href="#how-it-works" class="block px-3 py-2 text-base font-medium text-white bg-ember-600 rounded-lg hover:bg-ember-700 transition-colors text-center focus:outline-none focus:ring-2 focus:ring-ember-500 focus:ring-offset-2">
         {t('nav.getStarted')}
       </a>
       <div class="mt-4 px-3">
@@ -88,7 +91,18 @@ const navItems = [
   const mobileMenu = document.getElementById('mobile-menu');
   
   mobileMenuButton?.addEventListener('click', () => {
+    const isOpen = !mobileMenu?.classList.contains('hidden');
     mobileMenu?.classList.toggle('hidden');
+    mobileMenuButton?.setAttribute('aria-expanded', (!isOpen).toString());
+  });
+
+  // Handle keyboard events for mobile menu button
+  mobileMenuButton?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      mobileMenu?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      mobileMenuButton?.focus();
+    }
   });
 
   // Smooth scrolling for navigation links
