@@ -1,6 +1,6 @@
 # Embrex Marketing Site
 
-This is the marketing website for Embrex (formerly Codex), a code generation tool for Symfony, built with Astro.
+This is the marketing website for Embrex (formerly Embrex), a code generation tool for Symfony, built with Astro.
 
 ## 🚀 Getting Started
 
